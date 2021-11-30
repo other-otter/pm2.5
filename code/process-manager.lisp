@@ -39,9 +39,7 @@
                                 (getf (gethash program-name *uid-map*) :pty)
                                 restart-pty
                                 (getf (gethash program-name *uid-map*) :restart)
-                                restart-thread
-                                (gethash restart-process *process-map*)
-                                program-name)))
+                                restart-thread)))
             (progn  (remhash the-process *process-map*)
                     (setf (getf (gethash program-name *uid-map*) :restart) nil)
                     (push (read-from-pty-stream (getf program-info :pty)) (getf (gethash program-name *uid-map*) :note))
@@ -58,5 +56,3 @@
 (defun write-to-pty-stream (the-pty-stream the-string)
     (format the-pty-stream the-string)
     (finish-output the-pty-stream))
-
-;
